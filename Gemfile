@@ -1,78 +1,35 @@
-source ENV['GEM_SOURCE'] || "https://rubygems.org"
+source "https://rubygems.org"
 
-def location_for(place, fake_version = nil)
-  if place =~ /^(git[:@][^#]*)#(.*)/
-    [fake_version, { :git => $1, :branch => $2, :require => false }].compact
-  elsif place =~ /^file:\/\/(.*)/
-    ['>= 0', { :path => File.expand_path($1), :require => false }]
-  else
-    [place, { :require => false }]
-  end
+group :test do
+  gem "rake"
+  gem "puppet", ENV['PUPPET_GEM_VERSION'] || '~> 4.2.1'
+  gem "rspec", '< 3.2.0'
+  gem "rspec-puppet", :git => 'https://github.com/rodjek/rspec-puppet.git'
+  gem "puppetlabs_spec_helper"
+  gem "metadata-json-lint"
+  gem "rspec-puppet-facts"
+  gem 'rubocop', '0.33.0'
+  gem 'simplecov', '>= 0.11.0'
+  gem 'simplecov-console'
+
+  gem "puppet-lint-absolute_classname-check"
+  gem "puppet-lint-leading_zero-check"
+  gem "puppet-lint-trailing_comma-check"
+  gem "puppet-lint-version_comparison-check"
+  gem "puppet-lint-classes_and_types_beginning_with_digits-check"
+  gem "puppet-lint-unquoted_string-check"
+  gem 'listen', '3.0.6'
 end
 
-group :development, :test do
-  gem 'hiera',                                 :require => false
-  gem 'metadata-json-lint',                    :require => false
-  gem 'mime-types', '<2.0',                    :require => false
-  gem 'pry',                                   :require => false
-  gem 'puppet_facts',                          :require => false
-  gem 'puppet-lint',                           :require => false
-  gem 'puppet-lint-param-docs',                :require => false
-  gem 'puppet-lint-absolute_classname-check',  :require => false
-  gem 'puppet-lint-absolute_template_path',    :require => false
-  gem "puppet-lint-classes_and_types_beginning_with_digits-check", :require => false
-  gem 'puppet-lint-trailing_newline-check',    :require => false
-  gem "puppet-lint-trailing_comma-check",      :require => false
-  gem 'puppet-lint-unquoted_string-check',     :require => false
-  gem 'puppet-lint-leading_zero-check',        :require => false
-  gem 'puppet-lint-variable_contains_upcase',  :require => false
-  gem "puppet-lint-version_comparison-check",  :require => false
-  gem 'puppet-lint-numericvariable',           :require => false
-  gem 'puppetlabs_spec_helper',                :require => false
-  gem 'rake',                                  :require => false
-  gem 'rspec-puppet-augeas',                   :require => false
-  gem 'rspec-puppet-facts',                    :require => false
-  gem 'rspec-puppet-utils',                    :require => false
-  gem 'rubocop', '0.33.0',                     :require => false
-  gem 'simplecov',                             :require => false
-  gem 'simplecov-console',                     :require => false
+group :development do
+  gem "travis"
+  gem "travis-lint"
+  gem "puppet-blacksmith"
+  gem "guard-rake"
 end
 
-group :system_test do
-  gem 'serverspec',    :require => false
-  gem 'beaker',        :require => false
-  if beaker_version = ENV['BEAKER_VERSION']
-    gem 'beaker', *location_for(beaker_version)
-  end
-  if beaker_rspec_version = ENV['BEAKER_RSPEC_VERSION']
-    gem 'beaker-rspec', *location_for(beaker_rspec_version)
-  else
-    gem 'beaker-rspec',  :require => false
-  end
+group :system_tests do
+  gem "beaker"
+  gem "beaker-rspec"
+  gem "beaker-puppet_install_helper"
 end
-
-if facterversion = ENV['FACTER_GEM_VERSION']
-  gem 'facter', facterversion, :require => false
-else
-  gem 'facter', :require => false
-end
-
-if puppetversion = ENV['PUPPET_GEM_VERSION']
-  gem 'puppet', puppetversion, :require => false
-else
-  gem 'puppet', :require => false
-end
-
-if rspecversion = ENV['RSPEC_GEM_VERSION']
-  gem 'rspec', rspecversion, :require => false
-else
-  gem 'rspec', :require => false
-end
-
-if rspecpuppetversion = ENV['RSPECPUPPET_GEM_VERSION']
-  gem 'rspec-puppet', rspecpuppetversion, :require => false
-else
-  gem 'rspec-puppet', :require => false
-end
-
-# vim:ft=ruby
