@@ -2,7 +2,7 @@
 # Dockerfile to build an rspec-puppet container image
 # Based on fedora:21 because 22/latest uses too new of ruby
 ###########################################################
-FROM fedora:21
+FROM registry.access.redhat.com/rhel7
 MAINTAINER Greg Swift "gregswift@gmail.com"
 
 # Yum or dnf ? depends on fedora version. 22+ is dnf
