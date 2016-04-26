@@ -20,17 +20,22 @@ group :development, :test do
   gem 'puppet-lint-param-docs',                :require => false
   gem 'puppet-lint-absolute_classname-check',  :require => false
   gem 'puppet-lint-absolute_template_path',    :require => false
+  gem "puppet-lint-classes_and_types_beginning_with_digits-check", :require => false
   gem 'puppet-lint-trailing_newline-check',    :require => false
+  gem "puppet-lint-trailing_comma-check",      :require => false
   gem 'puppet-lint-unquoted_string-check',     :require => false
   gem 'puppet-lint-leading_zero-check',        :require => false
   gem 'puppet-lint-variable_contains_upcase',  :require => false
+  gem "puppet-lint-version_comparison-check",  :require => false
   gem 'puppet-lint-numericvariable',           :require => false
   gem 'puppetlabs_spec_helper',                :require => false
   gem 'rake',                                  :require => false
   gem 'rspec-puppet-augeas',                   :require => false
   gem 'rspec-puppet-facts',                    :require => false
   gem 'rspec-puppet-utils',                    :require => false
+  gem 'rubocop', '0.33.0',                     :require => false
   gem 'simplecov',                             :require => false
+  gem 'simplecov-console',                     :require => false
 end
 
 group :system_test do
