@@ -15,6 +15,9 @@ RUN printf "gem: --no-rdoc --no-ri" >> /etc/gemrc && \
 # Pin the version if we need to
 ENV puppetversion "~> 4.2.1"
 
+# Enable Unicode
+ENV LANG C.UTF-8
+
 # Now do the bundle install. I Split this off to minimize differences between 3 and 4
 RUN PUPPET_GEM_VERSION=${puppetversion} bundler install --clean --system --gemfile /Gemfile
 
