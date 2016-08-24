@@ -1,16 +1,16 @@
 source "https://rubygems.org"
 
 group :test do
-  gem "rake", '< 11'
+  gem "rake", '10.5.0'
   gem "puppet", ENV['PUPPET_GEM_VERSION'] || '~> 4.2.1'
   gem "rspec", '< 3.2.0'
-  gem "rspec-puppet"
-  gem "puppetlabs_spec_helper"
-  gem "metadata-json-lint"
-  gem "rspec-puppet-facts"
+  gem "rspec-puppet", '2.4.0'
+  gem "puppetlabs_spec_helper", '1.1.1'
+  gem "metadata-json-lint", '0.0.11'
+  gem "rspec-puppet-facts", '1.6.1'
   gem 'rubocop', '0.33.0'
-  gem 'simplecov', '>= 0.11.0'
-  gem 'simplecov-console'
+  gem 'simplecov', '0.11.2'
+  gem 'simplecov-console', '0.3.0'
 
   gem "puppet-lint-absolute_classname-check"
   gem "puppet-lint-leading_zero-check"
