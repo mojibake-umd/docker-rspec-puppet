@@ -9,17 +9,11 @@ RUN printf "gem: --no-rdoc --no-ri" >> /etc/gemrc && \
     gem install json -v '1.8.3' && \
     gem install bundler
 
-# Set Puppet Version
-# TODO: Eventually we wont need separate files for this
-# https://github.com/docker/docker/issues/14634
-# Pin the version if we need to
-ENV puppetversion "~> 4.2.1"
-
 # Enable Unicode
 ENV LANG C.UTF-8
 
 # Now do the bundle install. I Split this off to minimize differences between 3 and 4
-RUN PUPPET_GEM_VERSION=${puppetversion} bundler install --clean --system --gemfile /Gemfile
+RUN bundler install --clean --system --gemfile /Gemfile
 
 #Don't like that is sets clean in global config
 RUN bundle config --delete clean
