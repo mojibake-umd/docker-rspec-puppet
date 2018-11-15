@@ -1,4 +1,4 @@
-FROM ruby:2.1.9
+FROM ruby:2.4
 
 # Add Gemfile
 ADD Gemfile /
@@ -6,7 +6,6 @@ ADD Gemfile /
 # Configure to ever install a ruby gem docs then
 # Install the relevant gems and cleanup after
 RUN printf "gem: --no-rdoc --no-ri" >> /etc/gemrc && \
-    gem install json -v '1.8.3' && \
     gem install bundler
 
 # Enable Unicode

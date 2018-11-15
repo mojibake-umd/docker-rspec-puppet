@@ -8,7 +8,6 @@ group :test do
   gem "puppetlabs_spec_helper"
   gem "metadata-json-lint"
   gem "rspec-puppet-facts"
-  gem 'rubocop'
   gem 'simplecov', '>= 0.11.0'
   gem 'simplecov-console'
   gem 'semantic_puppet'
@@ -22,6 +21,14 @@ group :test do
   gem 'puppet-lint-resource_reference_syntax'
 
   gem 'json_pure', '<= 2.0.1' if RUBY_VERSION < '2.0.0'
+
+  if RUBY_VERSION < '2.2.0'
+    gem "rubocop", "< 0.60.0"
+  else
+    # rubocop:disable Bundler/DuplicatedGem
+    gem "rubocop"
+    # rubocop:enable Bundler/DuplicatedGem
+  end
 end
 
 group :development do
